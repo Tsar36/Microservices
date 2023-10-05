@@ -4,4 +4,4 @@ MAINTAINER seriy.tsar@gmail.com
 RUN apt-get update
 RUN apt-get install -y mysql-server
 EXPOSE 3306
-CMD ["/usr/bin/MySQLd_safe"]
+CMD ["/usr/bin/mysqld_safe"]
