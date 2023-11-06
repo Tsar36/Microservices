@@ -1,8 +1,7 @@
 version: '2'
 
 networks:
-- my_network:
-  driver:bridge
+- my_network: driver:bridge
 
 volumes:
 prometheus_data: {}
