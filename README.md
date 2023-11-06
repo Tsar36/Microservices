@@ -5,6 +5,6 @@ To run the command use:
 -  "for docker-compose files use:" 'docker-compose up -d'
 ## Example:
 docker build -t tsar/MySQL
-To run the image and to make a container:
+$ To run the image and to make a container:
 - docker run -d -p 3306:3306 tsar/MySQL
 
