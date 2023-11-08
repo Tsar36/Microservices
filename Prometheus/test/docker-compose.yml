@@ -2,7 +2,7 @@ version: '2'
 
 networks:
   my_network: 
-  driver:bridge
+    driver:bridge
 
 volumes:
   prometheus_data: {}
@@ -24,6 +24,6 @@ services:
     ports:
       - 9090:9090
     networks:
-      - my_network
+      my_network:
     labels:
       org.label-schema.group: "monitoring for MY containers"
