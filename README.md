@@ -1,5 +1,5 @@
 # Microservices
-The folder contains most popular services written in 'Dockerfile' or 'docker-compose.yml' creating a container service. Ready to deploy at any platform as a microservice in a container. 
+The folder contains most popular services written in 'Dockerfile' or 'docker-compose.yml' creating a container service. Ready to deploy at any platform as a microservice in a container. These samples offer a starting point for how to integrate different services using a Compose file.
 To run the command use:
 - "for Dockerfile use:" `docker build [options] path/URL`
 -  "for docker-compose files use:" `docker-compose up -d`
