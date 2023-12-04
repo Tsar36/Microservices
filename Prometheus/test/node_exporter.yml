@@ -1,0 +1,22 @@
+nodeexporter:
+  image: prom/node-exporter container_name: nodeexporter restart: unless-stopped
+  expose:
+    - 9100
+  networks:
+    - my_network
+  labels:
+    org.label-schema.group: "monitoring for TEST containers"
+  
+cadvisor:
+  image: google/cadvisor:v0.26.1 container_name: pk_cadvisor
+  volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro restart: unless-stopped
+  expose:
+    - 8080
+  networks:
+    - my_network
+labels:
+  org.label-schema.group: "monitoring for TEST containers"
