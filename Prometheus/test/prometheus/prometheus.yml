@@ -5,6 +5,12 @@ global:
 rule_files:
   - "container.rules"
 
+alerting:
+  alertmanagers:
+    - scheme: http
+      static_configs:
+        - targets: [ 'alertmanager:9093' ]
+
 scrape_configs:
   - job_name: "prometheus"
     scrape_interval: 1m
