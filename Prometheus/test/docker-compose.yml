@@ -74,7 +74,7 @@ services:
       org.label-schema.group: "Monitoring for TEST containers"
 
   cadvisor:
-    platform: linux/amd64
+#    platform: linux/amd64
     image: google/cadvisor
     container_name: cadvisor
     volumes:
