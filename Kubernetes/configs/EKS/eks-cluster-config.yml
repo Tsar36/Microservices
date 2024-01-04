@@ -6,7 +6,7 @@ metadata:
   version: "1.21" # Cluster K8s version
   region: us-east-2 # Region AWS
 
-# The VPC subnets should be created before run the cluster. R.g. use the CF template
+# The VPC subnets should be created before run the cluster. R.g. use the CF template form directory.
 vpc:
 subnets:
   public:
