@@ -4,15 +4,13 @@ Description: "Network: VPC, Subnets + RouteTables, Internet + NAT Gateways"
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
-      - 
-        Label:
+      - Label:
           default: "Network Configuration"
         Parameters:
           - Environment
           - VPCBlock
           - VPCBlock2
-      - 
-        Label:
+      - Label:
           default: "Subnets CIDR Blocks"
         Parameters:
           - PublicSubnetACIDR
@@ -66,7 +64,7 @@ Parameters:
     Description: "Database Subnet-B CIDR"
 
 Resources:
-  #============= VPC ==================
+#============= VPC ==================
   VPC:
     Type: AWS::EC2::VPC
     Properties: # Attach Primary CIDR Block
@@ -85,7 +83,7 @@ Resources:
       CidrBlock: !Ref VPCBlock2
       VpcId: !Ref VPC
 
-  #====== Internet Gateway =======
+#====== Internet Gateway =======
   GatewayInternet:
     Type: "AWS::EC2::InternetGateway"
     Properties:
@@ -99,7 +97,7 @@ Resources:
       VpcId: !Ref VPC
       InternetGatewayId: !Ref GatewayInternet
 
-  #====== Public RouteTables =========
+#====== Public RouteTables =========
   RouteTableForPublicSubnet: # Creation of Empty Route Table
     Type: "AWS::EC2::RouteTable"
     Properties:
@@ -116,7 +114,7 @@ Resources:
       GatewayId: !Ref GatewayInternet
       RouteTableId: !Ref RouteTableForPublicSubnet
 
-  #====== Private RouteTables ===========
+#====== Private RouteTables ===========
   RouteTableForPrivateSubnetA:
     Type: "AWS::EC2::RouteTable"
     Properties:
@@ -133,7 +131,7 @@ Resources:
         - Key: Name
           Value: !Join [" ", [!Ref Environment, "PrivateRouteTableB"]]
 
-  #======= Routes for Private Subnet RouteTables using NAT
+#======= Routes for Private Subnet RouteTables using NAT
   RoutesForPrivateRouteTableA:
     Type: AWS::EC2::Route
     DependsOn: NATGatewayA
@@ -150,7 +148,7 @@ Resources:
       RouteTableId: !Ref RouteTableForPrivateSubnetB
       NatGatewayId: !Ref NATGatewayB
 
-  #====== Associate Public Route for Public Subnets
+#====== Associate Public Route for Public Subnets
   RouteAssociationPublicA:
     Type: "AWS::EC2::SubnetRouteTableAssociation"
     Properties:
@@ -163,7 +161,7 @@ Resources:
       RouteTableId: !Ref RouteTableForPublicSubnet
       SubnetId: !Ref PublicSubnetB
 
-  #===== Associate Private Route for Private Subnets
+#===== Associate Private Route for Private Subnets
 
   RouteAssociationPrivateA:
     Type: "AWS::EC2::SubnetRouteTableAssociation"
@@ -199,7 +197,7 @@ Resources:
       RouteTableId: !Ref RouteTableForDatabase
       SubnetId: !Ref DatabaseSubnetB
 
-  #======= ElasticIP for NAT Gateways ======
+#======= ElasticIP for NAT Gateways ======
 
   EIP1:
     Type: "AWS::EC2::EIP"
@@ -219,7 +217,7 @@ Resources:
         - Key: Name
           Value: EIP-NATGateway-B
 
-  #========= NAT Gateways ===============
+#========= NAT Gateways ===============
 
   NATGatewayA:
     DependsOn: GatewayAttachmentInternet
@@ -241,7 +239,7 @@ Resources:
         - Key: Name
           Value: NATGateway-B
 
-  #============ ALL Subnets ======================================================
+#============ ALL Subnets ======================================================
   PublicSubnetA:
     Type: "AWS::EC2::Subnet"
     Properties:
