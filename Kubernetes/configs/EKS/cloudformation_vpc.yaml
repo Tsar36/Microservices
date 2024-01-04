@@ -1,3 +1,9 @@
+# --------------------------------------------------------------------------------------------------
+# CloudFormation Network Layer: VPC, Subnets + RouteTables, Internet + NAT Gateways
+# Author: Serhii Tsar
+# --------------------------------------------------------------------------------------------------
+
+
 AWSTemplateFormatVersion: 2010-09-09
 Description: "Network: VPC, Subnets + RouteTables, Internet + NAT Gateways"
 
@@ -23,7 +29,7 @@ Metadata:
 Parameters:
   Environment:
     Type: String
-    Default: "KGB-Prod"
+    Default: "Prod"
 
   VPCBlock:
     Type: String
