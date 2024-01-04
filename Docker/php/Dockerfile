@@ -10,3 +10,6 @@ EXPOSE 80
 
 
 # docker build -t myk8sapp .
+# docker tag myk8sapp:latest appphp/k8s:latest
+# docker login
+# docker push appphp/k8s:latest
