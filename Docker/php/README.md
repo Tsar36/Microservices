@@ -1,13 +1,5 @@
-FROM amazonlinux
-
-RUN yum -y update \
-    yum -y install httpd \
-    yum -y install php
-
-COPY ./index.php /var/www/html/index.php
-CMD [ "/usr/sbin/httpd", "-D", "FOREGROUND" ]
-EXPOSE 80
-
+#Dockerfile with PHP application
+#To run the app in docker container:
 
 # docker build -t myk8sapp .
 # docker tag myk8sapp:latest Tsar36/k8s:latest
