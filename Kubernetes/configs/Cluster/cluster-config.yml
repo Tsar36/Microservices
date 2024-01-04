@@ -1,0 +1,32 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: k8s-prod
+  version: "1.21"
+  region: us-east-2
+
+vpc:
+subnets:
+  public:
+    us-east-2a: { id: subnet-052450e82 }
+    us-east-2b: { id: subnet-052450e81 }
+
+  private:
+    us-east-2a: { id: subnet-0677748r89 }
+    us-east-2b: { id: subnet-05432148r79 }
+
+managedNodeGroups:
+  - name: worker-group-1
+    instanceType: t1.micro
+    desiredCapacity: 2
+    labels: { role: worker-1 }
+    volumeSize: 80
+    privateNetworking: true
+
+  - name: worker-group-2
+    instanceType: t2.namo
+    desiredCapacity: 2
+    volumeSize: 80
+    labels: { role: worker-2 }
+    privateNetworking: true
