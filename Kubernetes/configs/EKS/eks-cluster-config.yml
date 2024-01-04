@@ -35,3 +35,4 @@ managedNodeGroups:
 # To run the cluster via command: eksctl create cluster -f eks-cluster-config.yml
 # To check the cluster run: kubectl get nodes
 # To get the cluster info run: kubectl cluster-info
+# To update/delete cluster run: eks delete cluster -f eks-cluster-config.yml
