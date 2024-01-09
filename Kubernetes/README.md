@@ -1,6 +1,6 @@
 # Example with the "minikube"
 ## Execute the following kubernetes manifest (BASH) to deploy 'nginx' deployment and a 'Nodeport' service.
-
+~~~
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Service
@@ -34,7 +34,7 @@ spec:
         ports:
         - containerPort: 80
 EOF
-
+~~~
 
 
 ## Validate deployment and service:
