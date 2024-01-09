@@ -9,9 +9,9 @@
 - docker push <LOGIN/NAME_app>:latest
 ## Run the container with php application
 - docker run -it -p 1234:80 <LOGIN/NAME_app>:latest
-##To check the application running on the localhost:1234
+## To check the application running on the localhost:1234
 -  http://localhost:1234
-#----------------------------------------------------------
+# ----------------------------------------------------------
 ## Ready to pull image from the Docker-Hub:
 - docker pull tsar36/app-php:latest
 ## Run as container:
@@ -22,12 +22,9 @@
 
 # ----------------------------------------------------------
 # Updated:
-### Add the ServerName 127.0.0.1 line to the end of the file:
+### Add the "ServerName 127.0.0.1" line to the end of the file:
 
 /etc/httpd/conf/httpd.conf
-. . .
-IncludeOptional conf.d/*.conf
-ServerName 127.0.0.1
 
 ## Then:
 - sudo apachectl configtest
