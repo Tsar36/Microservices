@@ -1,4 +1,4 @@
-#Dockerfile with PHP application of the Web-Server
+# Dockerfile with PHP application of the simple Web-Server.
 
 
 ## Create a docker image from the Dockerfile
@@ -22,7 +22,7 @@
 
 # ----------------------------------------------------------
 # Updated:
-## Add the ServerName 127.0.0.1 line to the end of the file:
+### Add the ServerName 127.0.0.1 line to the end of the file:
 
 /etc/httpd/conf/httpd.conf
 . . .
