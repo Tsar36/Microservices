@@ -1,0 +1,36 @@
+# Up and Running two containers "Apache" and "Tomcat"
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "my-app"
+  namespace: default
+  labels:
+    app: "my-app"
+    env: "prod"
+    tier: "front-end"
+    owner: "TsaR"
+spec:
+  containers:
+  - name: apache-container
+    image: httpd:latest
+    resources:
+      limits:
+        cpu: 200m
+        memory: 500Mi
+      requests:
+        cpu: 100m
+        memory: 200Mi
+    ports:
+    - containerPort: 80
+
+  - name: tomcat-api
+    image: tomcat:8.5.38
+    resources:
+      limits:
+        cpu: 200m
+        memory: 500Mi
+      requests:
+        cpu: 100m
+        memory: 200Mi
+    ports:
+    - containerPort: 8080

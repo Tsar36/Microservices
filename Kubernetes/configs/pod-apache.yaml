@@ -1,0 +1,40 @@
+# The simple app WEB server apache shows the string "It works!"
+# After up and running pod make sure of the "kubectl port-forward <your_port>:80"
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "my-web"
+  namespace: default
+  labels:
+    app: "my-web"
+    env: "prod"
+    tier: "front-end"
+    owner: "TsaR"
+spec:
+  containers:
+  - name: apache-container
+    image: httpd:latest
+    resources:
+      limits:
+        cpu: 200m
+        memory: 500Mi
+      requests:
+        cpu: 100m
+        memory: 200Mi
+  #   env:
+  #   - name: DB_HOST
+  #     valueFrom:
+  #       configMapKeyRef:
+  #         name: "my-web"
+  #         key: DB_HOST
+    ports:
+     - containerPort:  80
+       name:  http
+  #   volumeMounts:
+  #   - name: localtime
+  #     mountPath: /etc/localtime
+  # volumes:
+  #   - name: localtime
+  #     hostPath:
+  #       path: /usr/share/zoneinfo/Asia/Shanghai
+  # restartPolicy: Always
