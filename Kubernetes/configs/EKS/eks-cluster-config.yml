@@ -1,3 +1,5 @@
+# The config of the production ready cluster
+
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
@@ -10,8 +12,8 @@ metadata:
 vpc:
 subnets:
   public:
-    us-east-2a: { id: subnet-052450e82 } # Name of the VPC availability zones. Uses for the ELB
-    us-east-2b: { id: subnet-052450e81 }
+    us-east-2a: { id: subnet-052450e82 } # Name of the your VPC availability zones. Uses for the ELB
+    us-east-2b: { id: subnet-052450e81 } # Copy and paste from your VPC subnets ID
 
   private:
     us-east-2a: { id: subnet-0677748r89 }
@@ -20,19 +22,21 @@ subnets:
 # The cluster will consist of the two worker groups in the private subnets
 managedNodeGroups:
   - name: worker-group-1
-    instanceType: t1.micro
+    instanceType: m5.large
     desiredCapacity: 2
     labels: { role: worker-1 }
     volumeSize: 80
     privateNetworking: true
 
   - name: worker-group-2
-    instanceType: t2.namo
+    instanceType: r5.large
     desiredCapacity: 2
     volumeSize: 80
     labels: { role: worker-2 }
     privateNetworking: true
-# To run the cluster via command: eksctl create cluster -f eks-cluster-config.yml
-# To check the cluster run: kubectl get nodes
-# To get the cluster info run: kubectl cluster-info
-# To update/delete cluster run: eks delete cluster -f eks-cluster-config.yml
+
+    
+# To run the cluster via command: $ eksctl create cluster -f eks-cluster-config.yml
+# To check the cluster run: $ kubectl get nodes
+# To get the cluster info run: $ kubectl cluster-info
+# To update/delete cluster run: $ eks update/delete cluster -f eks-cluster-config.yml
