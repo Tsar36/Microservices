@@ -1,4 +1,5 @@
 # Up and Running two containers "Apache" and "Tomcat"
+# kubectl port-forward my-app 5555:8080 (Tomcat)
 apiVersion: v1
 kind: Pod
 metadata:
