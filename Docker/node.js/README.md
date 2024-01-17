@@ -12,3 +12,9 @@ docker build --platform linux/amd64 -t nodejs:latest .
 '''
 docker run --platform linux/amd64 -it -p 3000:3000 nodejs:latest
 '''
+# Connect into the container is restricted by missing the shell into the based image 'gcr.io/distroless'.
+# You can use the 'node' to run into container:
+'''
+$ docker exec -ti <insert_docker_id> node
+
+'''
