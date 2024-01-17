@@ -1,12 +1,12 @@
-## Simple web server on Node.js which includes a Dockerfile, packages.js, index.js
+# Simple web server on Node.js which includes a Dockerfile, packages.js, index.js
 
-# How to build?
-'''
+## How to build?
+"""
 docker build .
 #For the M1 silicon cpu
 docker build --platform linux/amd64 -t nodejs:latest . 
 
-'''
+"""
 # How to run a container?
 
 '''
