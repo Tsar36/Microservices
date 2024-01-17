@@ -1,7 +1,9 @@
-FROM node:4.6
+FROM node:8 as build
 WORKDIR /app
-ADD . /app
+COPY package.json index.js ./
 RUN npm install express \
-    npm install 
+    npm install
+FROM gcr.io/distroless/nodejs
+COPY --from=build /app /
 EXPOSE 3000
-CMD [ "npm start" ]
+CMD [ "index.js" ]

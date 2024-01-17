@@ -4,12 +4,11 @@
 '''
 docker build .
 #For the M1 silicon cpu
-docker build --platform linux/amd64 -t nodejs:latest
+docker build --platform linux/amd64 -t nodejs:latest . 
 
 '''
 # How to run a container?
 
 '''
-docker run --platform linux/amd64 -p 3000:3000 -it nodejs:latest
-
+docker run --platform linux/amd64 -it -p 3000:3000 nodejs:latest
 '''
