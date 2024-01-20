@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-php-replicas
+  namespace: default
+  labels:
+    app: web-server
+    env: prod
+    owner: TsaR
+spec:
+  replicas: 3
+  selector:
+    # strategy:
+    #     maxUnavailable: 25%
+    #   type: RollingUpdate
+    matchLabels:
+      project: php
+  template:
+    metadata:
+      labels:
+        project: php
+    spec:
+      # initContainers:
+      # - Init containers always run to completion.
+      # - Each init container must complete successfully before the next one starts.
+      containers:
+        - name: web-php
+          image: tsar36/app-php:latest
+          ports:
+            - containerPort: 80

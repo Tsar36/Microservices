@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  web-php
+  namespace: default
+  labels:
+    app: web-server
+spec:
+  selector:
+  # replicas: 1
+  # strategy:
+  #     maxUnavailable: 25%
+  #   type: RollingUpdate
+    matchLabels:
+      project: home
+  template:
+    metadata:
+      labels:
+        project: home
+    spec:
+      # initContainers:
+          # - Init containers always run to completion.
+          # - Each init container must complete successfully before the next one starts.
+      containers:
+      - name:  home-web
+        image:  tsar36/app-php:version1
+        ports:
+        - containerPort: 80
