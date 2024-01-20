@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver-multipods
+  labels:
+    app: my-k8s-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: frontend
+  template:
+    metadata:
+      labels:
+        project: frontend # Service will look for those pods labels!!!
+    spec:
+      containers:
+        - name: apache
+          image: tsar36/app-php:latest
+          ports:
+            - containerPort: 80 # Port of pod
+
+        - name: tomcat
+          image: tomcat:8.5.38
+          ports:
+            - containerPort: 8080 # Port of pod
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: multipods-svc
+  namespace: default
+  labels:
+    env: prod
+    owner: TsaR
+spec:
+  type: LoadBalancer
+  selector:
+    project: frontend
+  # type: ClusterIP
+  # sessionAffinity: None
+  # sessionAffinityConfig:
+  #   clientIP:
+  #     timeoutSeconds: 10800
+  ports:
+    - name: apache-listener
+      protocol: TCP
+      port: 80
+      targetPort: 80
+      # If you set the `spec.type` field to `NodePort` and you want a specific port number,
+      # you can specify a value in the `spec.ports[*].nodePort` field.
+      # nodePort:
+
+    - name: tomcat-listener
+      protocol: TCP
+      port: 8080
+      targetPort: 8080

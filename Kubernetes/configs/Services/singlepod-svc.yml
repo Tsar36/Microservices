@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+  labels:
+    app: my-k8s-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      project: web
+  template:
+    metadata:
+      labels:
+        project: web # Service will look for those pods labels!!!
+    spec:
+      containers:
+        - name: web-php
+          image: tsar36/app-php:latest
+          resources:
+            limits:
+              cpu: 200m
+              memory: 500Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          ports:
+            - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: singlepod-service
+  labels:
+    env: prod
+    owner: TsaR
+spec:
+  selector:
+    project: web # Selecting pods with those labels
+  ports:
+    - port: 80 # port on the LB
+      protocol: TCP
+      targetPort: 80 # port on the pod
+  type: LoadBalancer
