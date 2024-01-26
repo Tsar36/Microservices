@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  web-php-autoscaling
+  name: web-php-autoscaling
   namespace: default
   labels:
     app: web-server
     env: prod
     owner: TsaR
 spec:
-  replicas: 2
+  replicas: 3
   selector:
-  # strategy:
-  #     maxUnavailable: 25%
-  #   type: RollingUpdate
+    # strategy:
+    #     maxUnavailable: 25%
+    #   type: RollingUpdate
     matchLabels:
       project: one
   template:
@@ -21,35 +21,45 @@ spec:
         project: one
     spec:
       # initContainers:
-          # - Init containers always run to completion.
-          # - Each init container must complete successfully before the next one starts.
+      # - Init containers always run to completion.
+      # - Each init container must complete successfully before the next one starts.
       containers:
-      - name:  php-web
-        image: tsar36/app-php:latest
-        ports:
-        - containerPort: 80
+        - name: php-web
+          image: tsar36/app-php:latest
+          resources:
+            requests:
+              cpu: 500m
+              memory: 100Mi
+            limits:
+              cpu: "1"
+              memory: 100Mi
+          ports:
+            - containerPort: 80
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: web-php-autoscaling
 spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: web-php-autoscaling
-  minReplicas: 1
-  maxReplicas: 3
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 50
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 50
+  selector:
+    project:
+      name: prod
+    scaleTargetRef:
+      apiVersion: apps/v1
+      kind: Deployment
+      name: web-php-autoscaling
+    minReplicas: 1
+    maxReplicas: 3
+    metrics:
+      - type: Resource
+        resource:
+          name: cpu
+          target:
+            type: Utilization
+            averageUtilization: 50
+      - type: Resource
+        resource:
+          name: memory
+          target:
+            type: Utilization
+            averageUtilization: 50

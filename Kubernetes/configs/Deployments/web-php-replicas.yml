@@ -26,5 +26,12 @@ spec:
       containers:
         - name: web-php
           image: tsar36/app-php:latest
+          resources:
+            requests:
+              cpu: 500m
+              memory: 100Mi
+            limits:
+              cpu: "1"
+              memory: 100Mi
           ports:
             - containerPort: 80
