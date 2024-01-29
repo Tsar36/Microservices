@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-paths
+  labels:
+    name: ingress-paths
+
+# The rules for redirection to the spec. paths (Contour doesn't support redirection to main.page)
+
+  rules:
+  - host: www.foo.bar.com      # IF URL of the target host.
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/page1"              # If the users go to the '/page1'
+        backend:
+          service:
+            name: main.foo.bar.com      # Make "redirection" to the backend-host (main) at "/page1"            
+            port: 
+              number: 80
+
+  - host: www.web2.foo.bar.com    # If goes to the host web2 and ...
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/page2"                # ... the "/page2", then go redirect to ...
+        backend:
+          service:
+            name: main.foo.bar.com        # ...this host and the path "/page2"
+            port: 
+              number: 80
+              
+      - pathType: Prefix
+        path: "/page1"
+        backend:
+          service:
+            name: main.foo.bar.com
+            port: 
+              number: 80
+
