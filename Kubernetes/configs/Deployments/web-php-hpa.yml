@@ -41,25 +41,22 @@ kind: HorizontalPodAutoscaler
 metadata:
   name: web-php-autoscaling
 spec:
-  selector:
-    project:
-      name: prod
-    scaleTargetRef:
-      apiVersion: apps/v1
-      kind: Deployment
-      name: web-php-autoscaling
-    minReplicas: 1
-    maxReplicas: 3
-    metrics:
-      - type: Resource
-        resource:
-          name: cpu
-          target:
-            type: Utilization
-            averageUtilization: 50
-      - type: Resource
-        resource:
-          name: memory
-          target:
-            type: Utilization
-            averageUtilization: 50
+  scaleTargetRef:
+    apiVersion: apps/v2beta1v1
+    kind: Deployment
+    name: web-php-autoscaling
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 50
