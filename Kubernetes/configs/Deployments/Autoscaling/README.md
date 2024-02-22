@@ -1,3 +1,9 @@
+## To run the hpa-example.yml
+```
+kubectl create -f hpa-example.yml
+```
+## To check with 'busybox' image:
+
 ```
 ✗ kubectl run -i --tty load-generator --image=busybox /bin/sh
 If you don't see a command prompt, try pressing enter.
