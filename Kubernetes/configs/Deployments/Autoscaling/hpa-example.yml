@@ -63,7 +63,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: myapphpa-example
+    name: hpa-example
   minReplicas: 1
   maxReplicas: 5
   targetCPUUtilizationPercentage: 50
