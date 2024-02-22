@@ -15,5 +15,6 @@ index.html           100% |*****************************************************
 'index.html' saved
 / # cat index.html
 OK!/ # 
+/ # while true; do wget http://hpa-example.default.svc.cluster.local:31001; done
 
 ```
