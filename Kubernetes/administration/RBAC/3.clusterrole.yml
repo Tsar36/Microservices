@@ -1,0 +1,10 @@
+# If you rather want to create a role that spans all namespaces, you can create ClusterRole
+
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: pod-reader-clusterwide
+rules:
+- apiGroups: [""]
+  resources: ["pods", "secrets"]
+  verbs: ["get", "watch", "list"]
