@@ -8,3 +8,4 @@ To run the command use:
 - _*To run the image and to make a container:*_
 - `docker run -d -p 3306:3306 tsar/MySQL`
 
+# The Kubernetes section contains the most useful templates of the pods, services and features.
