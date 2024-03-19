@@ -12,6 +12,13 @@ spec:
       containers:
         - name: k8-demo
           image: wardviaene/k8s-demo
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            limits:
+              cpu: 200m
+              memory: 200Mi
           ports:
             - name: nodejs-port
               containerPort: 3000
