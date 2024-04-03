@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: skaffold-demo
+  labels:
+    app: skaffold-demo
+spec:
+  containers:
+    - name: skaffold-demo
+      image: wardviaene/skaffold-demo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: skaffold-demo
+  namespace: default
+spec:
+  selector:
+    app: skaffold-demo
+  type: LoadBalancer
+  # sessionAffinity: None
+  # sessionAffinityConfig:
+  #   clientIP:
+  #     timeoutSeconds: 10800
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8080
+      # If you set the `spec.type` field to `NodePort` and you want a specific port number,
+      # you can specify a value in the `spec.ports[*].nodePort` field.
+      # nodePort:
