@@ -11,5 +11,13 @@ fluxctl install \
 ```
 ## Check rollout status:
 ```
-Kubectl -n flux rollout status deployment/flux
+kubectl -n flux rollout status deployment/flux
 ``` 
+## Setup SSH key (add to the github repo "deploy keys")
+```
+fluxctl identity --k8s-fwd-ns flux
+```
+## SYNC repo manually (optional)
+```
+fluxctl sync --k8s-fwd-ns flux
+```
