@@ -12,7 +12,7 @@ kubectl apply -f helloworld-gw.yaml # (If you want to contact with app, make dep
 ```
 ```
 kubectl get pods
-kubectl get svc -n istio-system -o wide
+kubectl get svc -n istio-system -o wide # take the url-ALB
 kubectl get virtualservice
 ```
 ```
