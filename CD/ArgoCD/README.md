@@ -13,6 +13,13 @@ argocd app set <appname> #Set the application’s configuration.
 argocd app delete <appname> #Delete an Argo CD application.
 ```
 
+## Install ArgoCD CLI/Login:
+```
+brew install argocd
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+argocd login 127.0.0.1:8080
+```
+
 ## Example of creating an Application using ArgoCD CLI:
 ```
 argocd app create webapp-kustom-prod \
@@ -20,3 +27,23 @@ argocd app create webapp-kustom-prod \
 --path kustom-webapp/overlays/prod --dest-server https://kubernetes.default.svc \
 --dest-namespace prod
 ```
+
+## Port-Forward:
+
+```
+kubectl port-forward service/argocd-server -n argocd 8080:443
+```
+
+## Get credentials:
+```
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+## Reset admin password and change it:
+```
+➜  ~ kubectl -n argocd patch secret argocd-secret \
+  -p '{"stringData": {
+    "admin.password": "$6$RA81u6Snj5HxQFzR$9Hgpof3yAdiZuFSZP20786dfg.iFqgt184SOynmtTCPRQAnsnBpQAoGHRLBEhLHkQvQdFMR.PslI/VkGj/",
+    "admin.passwordMtime": "'$(date +%FT%T%Z)'"
+  }}'
+  ```
