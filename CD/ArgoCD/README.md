@@ -13,7 +13,7 @@ argocd app set <appname> #Set the application’s configuration.
 argocd app delete <appname> #Delete an Argo CD application.
 ```
 
-# Example of creating an Application using ArgoCD CLI:
+## Example of creating an Application using ArgoCD CLI:
 ```
 argocd app create webapp-kustom-prod \
 --repo https://github.com/devopsjourney1/argo-examples.git \
